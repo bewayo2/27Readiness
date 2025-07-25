@@ -91,4 +91,12 @@ app.post('/api/summarize', async (req, res) => {
   }
 });
 
+// Serve React static files
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// Catchall: send back React's index.html for any non-API route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
+
 module.exports = app;
